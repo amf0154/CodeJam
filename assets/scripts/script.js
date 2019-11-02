@@ -65,7 +65,6 @@ letters.set('k38','↑');
 letters.set('k40','↓');
 letters.set('k39','→');
 
-
 getLetterStyle = (key) =>{
     const letterStyle = new Map();
     letterStyle.set('k27', 'f_key');
@@ -80,39 +79,13 @@ getLetterStyle = (key) =>{
     letterStyle.set('k18', 'left f_key');
     letterStyle.set('k18_duble', 'right f_key');
     letterStyle.set('fn', 'f_key');
-    return letterStyle.get(key) ? letterStyle.get(key) : 'key'
+    return letterStyle.get(key) ? letterStyle.get(key) : 'key';
 }
 
 let keyboard = document.createElement('div');
 keyboard.setAttribute('id', 'keyboard');
 let main = document.createElement('div');
 main.setAttribute('id', 'main');
-
-
-
-/*
-let k49 = document.createElement('div');
-k49.setAttribute('class', 'k49 key');
-let side49 = document.createElement('div')
-side49.setAttribute('class', 'side');
-side49.innerHTML="F1";
-let keyCap49 = document.createElement('div');
-keyCap49.setAttribute('class', 'keycap');
-
-
-var br = document.createElement('br');
-var val1=document.createTextNode("!");
-var val2=document.createTextNode("1");
-keyCap49.appendChild(val1);
-keyCap49.appendChild(br);
-keyCap49.appendChild(val2);
-
-//keyCap49.appendChild(x);
-keyCap49.innerHTML= "!<br/>1"
-keyCap49.appendChild(side49);
-k49.appendChild(keyCap49);
-*/
-
 
 letters.forEach((val, key) =>{
     let element = document.createElement('div');
@@ -125,6 +98,9 @@ letters.forEach((val, key) =>{
 })
 
 keyboard.appendChild(main);
+let textarea = document.createElement('textarea');
+textarea.setAttribute('id', 'textarea');
+document.body.appendChild(textarea);
 document.body.appendChild(keyboard);
 
 function checkDubleKey(key){
@@ -134,11 +110,7 @@ function checkDubleKey(key){
     return key;
 }
 
-
-
-
 keyDown = (e) =>{
-    console.log(e)
     const pressedKey = ('.k' + e.keyCode);
     let el = document.querySelector(pressedKey);
     el.classList.add('pressed');
@@ -148,5 +120,7 @@ keyUp = (e) =>{
     let el = document.querySelector(pressedKey);
     el.classList.remove('pressed');
 }
-addEventListener("keydown", keyDown);
-addEventListener("keyup", keyUp);
+
+textarea.addEventListener("keydown", keyDown);
+textarea.addEventListener("keyup", keyUp);
+textarea.focus();
